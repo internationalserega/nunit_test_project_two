@@ -4,107 +4,83 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace SeleniumTests
+namespace GitRepos
 {
     [TestFixture]
-    public class UntitledTestCase
+    public class GitRepos
     {
         private IWebDriver driver;
-        private StringBuilder verificationErrors;
         private string baseURL;
-        private bool acceptNextAlert = true;
+
 
         [SetUp]
-        public void SetupTest()
+        public void Setup()
         {
-            driver = new FirefoxDriver();
-            baseURL = "https://www.google.com/";
-            verificationErrors = new StringBuilder();
+            driver = new ChromeDriver();
+            baseURL = "https://github.com/login";
+            driver.Manage().Window.Maximize();
+            
         }
+
 
         [TearDown]
-        public void TeardownTest()
+        public void Teardown()
         {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
+            driver.Quit();
         }
+
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void GitReposeCreate()
         {
-            driver.Navigate().GoToUrl("https://github.com/");
-            driver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='↵'])[8]/following::ya-tr-span[1]")).Click();
-            driver.FindElement(By.Id("login_field")).Clear();
-            driver.FindElement(By.Id("login_field")).SendKeys("internationalserega");
-            driver.FindElement(By.Id("password")).Clear();
-            driver.FindElement(By.Id("password")).SendKeys("Z21nonStop21Z");
-            driver.FindElement(By.Id("login_field")).Click();
-            driver.FindElement(By.Id("password")).Click();
+            goToPageInGit();
+            normalaizeBrowser();
+            autorization(new AccountData ("internationalserega", "Z21nonStop21Z"));
+            goToPageCreateRepositori();
+            NameRepositori("unit_test_c_sharp_TESSTOVI");
+            DiscriptionNewRepositori("commentari");
+            ButtonNewRepositori();
+        }
+
+        private void ButtonNewRepositori()
+        {
+            driver.FindElement(By.XPath("//form[@id='new_repository']/div[4]/button/ya-tr-span")).Click();//создаём репозиторий
+        }
+
+        private void DiscriptionNewRepositori(string commentari)
+        {
+            driver.FindElement(By.Id("//*[@id='repository_description']")).SendKeys(commentari);//komment
+        }
+
+        private void NameRepositori(string namerepos)
+        {
+            driver.FindElement(By.Id("repository_name")).SendKeys(namerepos);//name repo
+        }
+
+        private void goToPageCreateRepositori()
+        {
+            driver.FindElement(By.XPath("//div[@id='repos-container']/h2/a/ya-tr-span")).Click();//переходим на экран создаие репозитория
+        }
+
+        private void autorization(AccountData account)//АТВОРИЗУЕМСя
+        {
+            driver.FindElement(By.Id("login_field")).SendKeys(account.Username);
+            driver.FindElement(By.Id("password")).SendKeys(account.Password);
             driver.FindElement(By.Name("commit")).Click();
-            driver.FindElement(By.XPath("//div[@id='repos-container']/h2/a/ya-tr-span")).Click();
-            driver.FindElement(By.Id("repository_name")).Click();
-            driver.FindElement(By.Id("repository_name")).Clear();
-            driver.FindElement(By.Id("repository_name")).SendKeys("internationalserega/unit_test_c_sharp_two");
-            driver.FindElement(By.Id("repository_auto_init")).Click();
-            driver.FindElement(By.XPath("//body")).Click();
-            driver.FindElement(By.XPath("//form[@id='new_repository']/div[4]/button/ya-tr-span")).Click();
-        }
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
         }
 
-        private bool IsAlertPresent()
+        private void normalaizeBrowser()
         {
-            try
-            {
-                driver.SwitchTo().Alert();
-                return true;
-            }
-            catch (NoAlertPresentException)
-            {
-                return false;
-            }
+            driver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='↵'])[8]/following::ya-tr-span[1]")).Click();
+            //расширяем окно баузера
         }
 
-        private string CloseAlertAndGetItsText()
+        private void goToPageInGit()
         {
-            try
-            {
-                IAlert alert = driver.SwitchTo().Alert();
-                string alertText = alert.Text;
-                if (acceptNextAlert)
-                {
-                    alert.Accept();
-                }
-                else
-                {
-                    alert.Dismiss();
-                }
-                return alertText;
-            }
-            finally
-            {
-                acceptNextAlert = true;
-            }
+            driver.Navigate().GoToUrl("https://github.com/login");
         }
     }
 }
