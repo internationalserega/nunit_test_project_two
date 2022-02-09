@@ -37,7 +37,7 @@ namespace GitRepos
         public void GitReposeCreate()
         {
             goToPageInGit();
-            normalaizeBrowser();
+            linkSingIn();
             autorization(new AccountData ("internationalserega", "Z21nonStop21Z"));
             goToPageCreateRepositori();
             NameRepositori("unit_test_c_sharp_TESSTOVI");
@@ -47,7 +47,7 @@ namespace GitRepos
 
         private void ButtonNewRepositori()
         {
-            driver.FindElement(By.XPath("//form[@id='new_repository']/div[4]/button/ya-tr-span")).Click();//создаём репозиторий
+            driver.FindElement(By.XPath("//*[@class='btn-primary btn']")).Click();//создаём репозиторий
         }
 
         private void DiscriptionNewRepositori(string commentari)
@@ -62,7 +62,7 @@ namespace GitRepos
 
         private void goToPageCreateRepositori()
         {
-            driver.FindElement(By.XPath("//div[@id='repos-container']/h2/a/ya-tr-span")).Click();//переходим на экран создаие репозитория
+            driver.FindElement(By.XPath("//*[@class='btn btn-sm btn-primary']")).Click();//переходим на экран создаие репозитория
         }
 
         private void autorization(AccountData account)//АТВОРИЗУЕМСя
@@ -72,9 +72,9 @@ namespace GitRepos
             driver.FindElement(By.Name("commit")).Click();
         }
 
-        private void normalaizeBrowser()
+        private void linkSingIn()
         {
-            driver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='↵'])[8]/following::ya-tr-span[1]")).Click();
+            driver.FindElement(By.XPath("//*[@class='HeaderMenu-link flex-shrink-0 no-underline']")).Click();
             //расширяем окно баузера
         }
 
