@@ -11,9 +11,9 @@ namespace GitRepos
         [Test]
         public void ReposRemovalTest()
         {
-            goToPageInGit();
-            autorization(new AccountData ("internationalserega", "Z21nonStop21Z"));
-            ClickTestRep();
+            navigator.goToPageInGit();
+            LoginHelper.autorization(new AccountData ("internationalserega", "Z21nonStop21Z"));
+            navigator.ClickTestRep();
             driver.FindElement(By.Id("settings-tab")).Click();
             ClickDeleteRepoSeting();
             NameDeleteRepo("internationalserega/unit_test_c_sharp_TESSTOVI");
