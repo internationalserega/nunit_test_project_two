@@ -6,18 +6,18 @@ namespace GitRepos
 {
     [TestFixture]
     public class GitDeleteRepos : TestBase
-    { 
+    {
 
         [Test]
         public void ReposRemovalTest()
         {
-            navigator.goToPageInGit();
-            LoginHelper.autorization(new AccountData ("internationalserega", "Z21nonStop21Z"));
+            app.Navigator.goToPageInGit();
+            app.Navigator(new AccountData("internationalserega", "Z21nonStop21Z"));
             navigator.ClickTestRep();
-            driver.FindElement(By.Id("settings-tab")).Click();
-            ClickDeleteRepoSeting();
-            NameDeleteRepo("internationalserega/unit_test_c_sharp_TESSTOVI");
-            ClickDeleteRepoFinish(); 
+            app.button.SettingRepo();
+            app.button.ClickDeleteRepoSeting();
+            app.text.NameDeleteRepo("internationalserega/unit_test_c_sharp_TESSTOVI");
+            app.button.ClickDeleteRepoFinish();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace GitRepos
             }
             set
             {
-                username = value; 
+                username = value;
             }
         }
         public string Password

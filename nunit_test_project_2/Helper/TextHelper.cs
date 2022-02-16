@@ -11,7 +11,7 @@ namespace GitRepos
 {
     public class TextHelper : HelperBase
     {
-        public TextHelper(IWebDriver driver): base(driver)
+        public TextHelper(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
         }

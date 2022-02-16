@@ -8,12 +8,12 @@ namespace GitRepos
         [Test]
         public void GitReposeCreateTest()
         {
-            navigator.goToPageInGit();
-            LoginHelper.autorization(new AccountData ("internationalserega", "Z21nonStop21Z"));
-            navigator.goToPageCreateRepositori();
-            NameRepositori("unit_test_c_sharp_TESSTOVI");
-            DiscriptionNewRepositori("commentari");
-            ButtonCreateNewRepositori();
+            app.Navigator.goToPageInGit();
+            app.Navigator(new AccountData("internationalserega", "Z21nonStop21Z"));
+            app.Navigator.goToPageCreateRepositori();
+            app.text.NameRepositori("unit_test_c_sharp_TESSTOVI");
+            app.text.DiscriptionNewRepositori("commentari");
+            app.button.ButtonCreateNewRepositori();
         }
     }
 }

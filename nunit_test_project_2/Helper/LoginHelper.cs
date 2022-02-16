@@ -21,7 +21,6 @@ namespace GitRepos
             driver.FindElement(By.Id("login_field")).SendKeys(account.Username);//вводим логин
             driver.FindElement(By.Id("password")).SendKeys(account.Password);//вводим пароль
             driver.FindElement(By.Name("commit")).Click();//авторизуемся на кнопку 
-
         }
     }
 }

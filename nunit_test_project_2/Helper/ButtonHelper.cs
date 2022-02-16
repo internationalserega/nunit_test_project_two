@@ -9,9 +9,9 @@ using OpenQA.Selenium.Chrome;
 
 namespace GitRepos
 {
-   public class ButtonHelper : HelperBase
+    public class ButtonHelper : HelperBase
     {
-        public ButtonHelper(IWebDriver driver):base(driver)
+        public ButtonHelper(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
         }
@@ -20,6 +20,11 @@ namespace GitRepos
         {
             driver.FindElement(By.XPath("//*[@class='btn-primary btn']"))
                 .Click();//кнопка создание репозитория
+        }
+
+        public void SettingRepo()
+        {
+            driver.FindElement(By.Id("settings-tab")).Click();
         }
 
         public void ClickDeleteRepoSeting()

@@ -11,7 +11,7 @@ namespace GitRepos
 {
     public class NavigationHelper : HelperBase
     {
-        public NavigationHelper(WebDriver driver): base(driver)
+        public NavigationHelper(WebDriver driver) : base(driver)
         {
             this.driver = driver;
         }
