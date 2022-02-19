@@ -9,7 +9,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace GitRepos
 {
-    class ApplicationManager
+   public class ApplicationManager
     {
         protected IWebDriver driver;
         protected string baseURL;
